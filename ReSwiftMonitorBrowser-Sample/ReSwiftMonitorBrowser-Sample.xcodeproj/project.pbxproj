@@ -15,7 +15,6 @@
 		172ADD2124E7294600468415 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172ADD1F24E7294600468415 /* LaunchScreen.storyboard */; };
 		172ADD2924E72BE100468415 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172ADD2824E72BE100468415 /* AppState.swift */; };
 		172ADD2B24E72E0800468415 /* QiitaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172ADD2A24E72E0800468415 /* QiitaState.swift */; };
-		172ADD2D24E732B000468415 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172ADD2C24E732B000468415 /* Variable.swift */; };
 		FBE3DDC3748C3E0D96931214 /* Pods_ReSwiftMonitorBrowser_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39710EE2BBF2E515BB0C2743 /* Pods_ReSwiftMonitorBrowser_Sample.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +29,6 @@
 		172ADD2224E7294600468415 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		172ADD2824E72BE100468415 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		172ADD2A24E72E0800468415 /* QiitaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaState.swift; sourceTree = "<group>"; };
-		172ADD2C24E732B000468415 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		39710EE2BBF2E515BB0C2743 /* Pods_ReSwiftMonitorBrowser_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReSwiftMonitorBrowser_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C186CAA8DEB8657338BAC94 /* Pods-ReSwiftMonitorBrowser-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReSwiftMonitorBrowser-Sample.release.xcconfig"; path = "Target Support Files/Pods-ReSwiftMonitorBrowser-Sample/Pods-ReSwiftMonitorBrowser-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		E698E00EE1F7EE4525BED4B0 /* Pods-ReSwiftMonitorBrowser-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReSwiftMonitorBrowser-Sample.debug.xcconfig"; path = "Target Support Files/Pods-ReSwiftMonitorBrowser-Sample/Pods-ReSwiftMonitorBrowser-Sample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 				172ADD1D24E7294600468415 /* Assets.xcassets */,
 				172ADD1F24E7294600468415 /* LaunchScreen.storyboard */,
 				172ADD2224E7294600468415 /* Info.plist */,
-				172ADD2C24E732B000468415 /* Variable.swift */,
 			);
 			path = "ReSwiftMonitorBrowser-Sample";
 			sourceTree = "<group>";
@@ -216,7 +213,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				172ADD1924E7294500468415 /* ViewController.swift in Sources */,
-				172ADD2D24E732B000468415 /* Variable.swift in Sources */,
 				172ADD1524E7294500468415 /* AppDelegate.swift in Sources */,
 				172ADD2B24E72E0800468415 /* QiitaState.swift in Sources */,
 				172ADD1724E7294500468415 /* SceneDelegate.swift in Sources */,
