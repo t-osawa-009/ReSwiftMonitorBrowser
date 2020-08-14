@@ -15,7 +15,9 @@ struct PeerObject {
     var dateString: String
     let actionStr: String
     let stateStr: String
+    let data: Data
     init(data: Data, peerID: MCPeerID) {
+        self.data = data
         self.peerID = peerID
         let decoder = JSONDecoder()
         if let json = try? decoder.decode([String: AnyDecodable].self, from: data),
