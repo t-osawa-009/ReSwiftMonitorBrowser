@@ -20,10 +20,7 @@ final class JSONDetailViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50.0
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
-        // UILongPressGestureRecognizer宣言
-        var longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed(recognizer:)))
-        
-        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed(recognizer:)))
         longPressRecognizer.delegate = self
         tableView.addGestureRecognizer(longPressRecognizer)
     }

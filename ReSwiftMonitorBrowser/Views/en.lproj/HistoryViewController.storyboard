@@ -11,7 +11,7 @@
         <!--History View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HistoryViewController" customModule="FlSwiftMonitor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HistoryViewController" customModule="ReSwiftMonitorBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,30 +33,40 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Sa5-Uo-uhU">
+                                <rect key="frame" x="217.66666666666666" y="396" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4b9-AV-GnI">
+                                <rect key="frame" x="0.0" y="64.333333333333314" width="80" height="747.66666666666674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="K69-U3-CkZ"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XOd-fE-8Kc">
-                                <rect key="frame" x="0.0" y="65" width="375" height="747"/>
+                                <rect key="frame" x="80" y="64.333333333333314" width="295" height="747.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Sa5-Uo-uhU">
-                                <rect key="frame" x="177.66666666666666" y="396" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Sa5-Uo-uhU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Db-nz-ORr"/>
-                            <constraint firstItem="XOd-fE-8Kc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hv9-9F-FnK"/>
+                            <constraint firstItem="4b9-AV-GnI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2xe-j6-O8v"/>
+                            <constraint firstAttribute="bottom" secondItem="4b9-AV-GnI" secondAttribute="bottom" id="8m5-WN-1cR"/>
+                            <constraint firstItem="4b9-AV-GnI" firstAttribute="top" secondItem="XM5-nS-a7a" secondAttribute="bottom" id="HMk-w3-WcG"/>
+                            <constraint firstItem="Sa5-Uo-uhU" firstAttribute="centerX" secondItem="XOd-fE-8Kc" secondAttribute="centerX" id="cp0-8u-rQn"/>
                             <constraint firstAttribute="bottom" secondItem="XOd-fE-8Kc" secondAttribute="bottom" id="jFx-ej-Cbf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XOd-fE-8Kc" secondAttribute="trailing" id="koZ-T8-fTc"/>
                             <constraint firstItem="Nis-7R-HlW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nZx-vR-y40"/>
-                            <constraint firstItem="XOd-fE-8Kc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oMJ-b6-HgQ"/>
                             <constraint firstItem="Nis-7R-HlW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rCv-rv-aw4"/>
-                            <constraint firstItem="XOd-fE-8Kc" firstAttribute="top" secondItem="Nis-7R-HlW" secondAttribute="bottom" constant="0.6666666666666714" id="xhy-Ri-Au8"/>
+                            <constraint firstItem="XOd-fE-8Kc" firstAttribute="leading" secondItem="4b9-AV-GnI" secondAttribute="trailing" id="tRm-54-fsk"/>
+                            <constraint firstItem="XOd-fE-8Kc" firstAttribute="top" secondItem="Nis-7R-HlW" secondAttribute="bottom" id="xhy-Ri-Au8"/>
                             <constraint firstItem="Sa5-Uo-uhU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="y4i-yI-PcG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="eJl-o2-tsw"/>
                     <connections>
+                        <outlet property="containerView" destination="4b9-AV-GnI" id="DJe-Cq-PxT"/>
                         <outlet property="indicator" destination="Sa5-Uo-uhU" id="65I-7g-Qj6"/>
                         <outlet property="statusLabel" destination="UMq-up-hKA" id="1w7-Je-ix2"/>
                         <outlet property="tableView" destination="XOd-fE-8Kc" id="guv-BU-4He"/>

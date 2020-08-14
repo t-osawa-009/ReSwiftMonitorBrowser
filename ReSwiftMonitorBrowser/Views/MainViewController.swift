@@ -32,6 +32,7 @@ final class MainViewController: UISplitViewController {
     }
     // MARK: - private
     private lazy var historyViewController = HistoryViewController.make()
+    private lazy var historyViewController2 = HistoryViewController.make()
     private lazy var jSONDetailViewController = JSONDetailViewController.make()
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)

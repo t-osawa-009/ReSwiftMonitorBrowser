@@ -30,6 +30,8 @@
 		172ADCD624E62B5700468415 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 172ADCD824E62B5700468415 /* Localizable.strings */; };
 		172ADCDB24E6589800468415 /* String+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172ADCDA24E6589800468415 /* String+ex.swift */; };
 		172ADCDF24E664CF00468415 /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172ADCDD24E664CE00468415 /* HistoryViewController.storyboard */; };
+		172ADCE524E6A18300468415 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172ADCE424E6A18300468415 /* UserListViewController.swift */; };
+		172ADCE724E6A1B000468415 /* UserListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172ADCE624E6A1B000468415 /* UserListViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		172ADCD924E62B5A00468415 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		172ADCDA24E6589800468415 /* String+ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ex.swift"; sourceTree = "<group>"; };
 		172ADCDE24E664CE00468415 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/HistoryViewController.storyboard; sourceTree = "<group>"; };
+		172ADCE424E6A18300468415 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		172ADCE624E6A1B000468415 /* UserListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserListViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,8 @@
 				172ADCB724E6270E00468415 /* MainViewController.swift */,
 				172ADCB624E6270E00468415 /* SettingViewController.storyboard */,
 				172ADCB424E6270E00468415 /* SettingViewController.swift */,
+				172ADCE424E6A18300468415 /* UserListViewController.swift */,
+				172ADCE624E6A1B000468415 /* UserListViewController.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +249,7 @@
 				172ADC9224E624F100468415 /* LaunchScreen.storyboard in Resources */,
 				172ADCD624E62B5700468415 /* Localizable.strings in Resources */,
 				172ADCBE24E6270E00468415 /* MainViewController.storyboard in Resources */,
+				172ADCE724E6A1B000468415 /* UserListViewController.storyboard in Resources */,
 				172ADCBF24E6270E00468415 /* SettingViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +272,7 @@
 				172ADCD124E6281700468415 /* Log.swift in Sources */,
 				172ADCC024E6270E00468415 /* MainViewController.swift in Sources */,
 				172ADCCF24E627E400468415 /* MultipeerConnectivityWrapper.swift in Sources */,
+				172ADCE524E6A18300468415 /* UserListViewController.swift in Sources */,
 				172ADCAB24E6266500468415 /* PeerObject.swift in Sources */,
 				172ADCA024E6259F00468415 /* SceneDelegate.swift in Sources */,
 				172ADCA824E6262E00468415 /* SessionState.swift in Sources */,

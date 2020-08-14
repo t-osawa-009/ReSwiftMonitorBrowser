@@ -16,9 +16,9 @@ final class HistoryViewController: UIViewController {
     
     func updateSearchText(_ text: String) {
         if text.isEmpty {
-            filteredItems = items
+            filteredItems = peerIDDic[key] ?? []
         } else {
-            filteredItems = items.filter { $0.actionStr.lowercased().contains(text.lowercased()) || $0.dateString.contains(text.lowercased()) }
+            filteredItems = peerIDDic[key] ?? [].filter { $0.actionStr.lowercased().contains(text.lowercased()) || $0.dateString.contains(text.lowercased()) }
         }
         filerWord = text
         debounceAction { [weak self] in
@@ -31,20 +31,41 @@ final class HistoryViewController: UIViewController {
     // MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        addChild(userListViewController)
+        view.addSubview(userListViewController.view)
+        userListViewController.didMove(toParent: self)
+        
+        userListViewController.didSelectRow = { [weak self] key in
+            self?.key = key
+        }
+        
         MultipeerConnectivityWrapper.shared.didReceiveDataHandler = { [weak self] object in
             guard let _self = self else {
                 return
             }
             self?.items.append(object)
             self?.items.sort(by: { $0.date > $1.date })
+            _self.peerIDDic = Dictionary(grouping: _self.items) { item -> String in
+                return item.peerID.displayName
+            }.reduce([String: [PeerObject]]()) { dic, tuple in
+                var dic = dic
+                dic[tuple.key] = tuple.value
+                return dic
+            }
+            
+            _self.userListViewController.setPeerIDDic(_self.peerIDDic)
+            if _self.peerIDDic.keys.count == 1 {
+                _self.key = _self.peerIDDic.keys.first ?? ""
+            }
+            
             if let text = self?.filerWord {
                 if text.isEmpty {
-                    _self.filteredItems = _self.items
+                    _self.filteredItems = _self.peerIDDic[_self.key] ?? []
                 } else {
-                    _self.filteredItems = _self.items.filter { $0.actionStr.lowercased().contains(text.lowercased()) || $0.dateString.contains(text.lowercased()) }
+                    _self.filteredItems = _self.peerIDDic[_self.key] ?? [].filter { $0.actionStr.lowercased().contains(text.lowercased()) || $0.dateString.contains(text.lowercased()) }
                 }
             } else {
-                _self.filteredItems = _self.items
+                _self.filteredItems = _self.peerIDDic[_self.key] ?? []
             }
             self?.debounceAction { [weak self] in
                 DispatchQueue.main.async {
@@ -72,7 +93,14 @@ final class HistoryViewController: UIViewController {
         statusLabel.text = MultipeerConnectivityWrapper.shared.state.rawValue
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        userListViewController.view.frame = containerView.frame
+    }
+    
     // MARK: - private
+    private lazy var userListViewController = UserListViewController.make()
+    private var key = ""
     private let debounceAction = DispatchQueue.global().debounce(delay: .milliseconds(500))
     @IBOutlet private weak var indicator: UIActivityIndicatorView! {
         didSet {
@@ -87,7 +115,9 @@ final class HistoryViewController: UIViewController {
             tableView.tableFooterView = .init()
         }
     }
+    @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var statusLabel: UILabel!
+    private var peerIDDic = [String: [PeerObject]]()
     private var items: [PeerObject] = []
     private var filteredItems: [PeerObject] = []
     private var filerWord: String?
