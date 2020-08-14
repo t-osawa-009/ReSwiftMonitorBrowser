@@ -11,9 +11,8 @@ class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Self.cellReuseIdentifier)
         
         tableView.dataSource = dataSource
-        fetchArticle { (array) in
-            store.dispatch(QiitaActionEnum.responseQiitaObjects(array))
-        }
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,8 +25,8 @@ class ViewController: UIViewController {
         store.unsubscribe(self)
     }
     
-    private func fetchArticle(completion: @escaping ([QiitaObject]) -> Swift.Void) {
-        let url = "https://qiita.com/api/v2/items"
+    private func fetchArticle(text: String, completion: @escaping ([QiitaObject]) -> Swift.Void) {
+        let url = "https://qiita.com/api/v2/items" + "?page=1&query=tag%3A" + text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         
         guard var urlComponents = URLComponents(string: url) else {
             return
@@ -68,8 +67,11 @@ class ViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: animate)
     }
     
-     @objc private func rightButtonTapped(_ sender: Any) {
-        fetchArticle { (array) in
+    @objc private func rightButtonTapped(_ sender: Any) {
+        guard let text = searchController.searchBar.text, !text.isEmpty else {
+            return
+        }
+        fetchArticle(text: text) { (array) in
             store.dispatch(QiitaActionEnum.responseQiitaObjects(array))
         }
     }
@@ -95,6 +97,11 @@ class ViewController: UIViewController {
             indicator.hidesWhenStopped = true
         }
     }
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        return  searchController
+    }()
     @IBOutlet private weak var tableView: UITableView!
     private var articles: [QiitaObject] = [] {
         didSet {
@@ -116,6 +123,17 @@ class ViewController: UIViewController {
             if let error = error {
                 print(error.localizedDescription)
             }
+        }
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, !text.isEmpty else {
+            return
+        }
+        fetchArticle(text: text) { (array) in
+            store.dispatch(QiitaActionEnum.responseQiitaObjects(array))
         }
     }
 }
