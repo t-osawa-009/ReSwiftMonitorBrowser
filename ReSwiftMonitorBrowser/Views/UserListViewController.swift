@@ -20,6 +20,9 @@ final class UserListViewController: UIViewController {
     func setPeerIDDic(_ peerIDDic: [String: [PeerObject]]) {
         self.peerIDDic = peerIDDic
         self.keys = peerIDDic.keys.map({$0})
+        if keys.count == 1 {
+            selectedKey = keys.first
+        }
         debounceAction { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
@@ -30,7 +33,9 @@ final class UserListViewController: UIViewController {
     // MARK: - private
     private var peerIDDic: [String: [PeerObject]] = [:]
     private var keys = [String]()
+    private var selectedKey: String?
     private let debounceAction = DispatchQueue.global().debounce(delay: .milliseconds(500))
+    private let throttleAction = DispatchQueue.global().throttle(delay: .milliseconds(500))
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -56,6 +61,14 @@ extension UserListViewController: UITableViewDataSource {
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         let item = keys[indexPath.row]
+        cell.selectionStyle = .none
+        cell.backgroundColor = {
+            if selectedKey == item {
+                return .blue
+            } else {
+                return .clear
+            }
+        }()
         cell.textLabel?.text = item
         return cell
     }
@@ -64,6 +77,12 @@ extension UserListViewController: UITableViewDataSource {
 extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = keys[indexPath.row]
+        selectedKey = item
         didSelectRow?(item)
+        throttleAction { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 }

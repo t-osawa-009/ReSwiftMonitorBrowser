@@ -36,7 +36,24 @@ final class HistoryViewController: UIViewController {
         userListViewController.didMove(toParent: self)
         
         userListViewController.didSelectRow = { [weak self] key in
+            guard let _self = self else {
+                return
+            }
             self?.key = key
+            if let text = self?.filerWord {
+                if text.isEmpty {
+                    _self.filteredItems = _self.peerIDDic[_self.key] ?? []
+                } else {
+                    _self.filteredItems = _self.peerIDDic[_self.key] ?? [].filter { $0.actionStr.lowercased().contains(text.lowercased()) || $0.dateString.contains(text.lowercased()) }
+                }
+            } else {
+                _self.filteredItems = _self.peerIDDic[_self.key] ?? []
+            }
+            self?.debounceAction { [weak self] in
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            }
         }
         
         MultipeerConnectivityWrapper.shared.didReceiveDataHandler = { [weak self] object in
@@ -139,7 +156,7 @@ extension HistoryViewController: UITableViewDataSource {
         let item = filteredItems[indexPath.row]
         let text: String = {
             if let index1 = item.actionStr.range(of: "(") {
-               return String(item.actionStr.prefix(upTo: index1.lowerBound))
+                return String(item.actionStr.prefix(upTo: index1.lowerBound))
             }
             return item.actionStr
         }()
