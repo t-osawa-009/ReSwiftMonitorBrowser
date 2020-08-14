@@ -26,10 +26,10 @@ final class JSONDetailViewController: UIViewController {
     }
     
     // MARK: - private
-    private enum Item: CaseIterable {
-        case date
-        case state
-        case action
+    private enum Section: String, CaseIterable {
+        case date = "Date"
+        case state = "State"
+        case action = "Action"
     }
     
     @objc private func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
@@ -39,7 +39,7 @@ final class JSONDetailViewController: UIViewController {
             recognizer.state == .began else {
                 return
         }
-        let item = Item.allCases[indexPath.section]
+        let item = Section.allCases[indexPath.section]
         switch item {
         case .date:
             break
@@ -83,7 +83,7 @@ extension JSONDetailViewController: UITableViewDataSource {
         guard object != nil else {
             return 0
         }
-        return Item.allCases.count
+        return Section.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,7 +98,7 @@ extension JSONDetailViewController: UITableViewDataSource {
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.selectionStyle = .none
-        let item = Item.allCases[indexPath.section]
+        let item = Section.allCases[indexPath.section]
         switch item {
         case .date:
             cell.textLabel?.text = object?.dateString ?? ""
@@ -111,20 +111,26 @@ extension JSONDetailViewController: UITableViewDataSource {
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        self.tableView.scrollToRow(at: .init(row: 0, section: index), at: .top, animated: true)
+        return index
+    }
 }
 
 extension JSONDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let item = Item.allCases[section]
-        switch item {
-        case .date:
-            return "Date"
-        case .state:
-            return "State"
-        case .action:
-            return "Action"
-        }
+        let item = Section.allCases[section]
+        return item.rawValue
     }
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        guard object != nil else {
+            return nil
+        }
+        return Section.allCases.map({ $0.rawValue })
+    }
+    
+    
 }
 
 extension JSONDetailViewController: UIGestureRecognizerDelegate {}

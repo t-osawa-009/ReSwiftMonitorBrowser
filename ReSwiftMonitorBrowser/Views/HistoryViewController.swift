@@ -137,7 +137,13 @@ extension HistoryViewController: UITableViewDataSource {
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         let item = filteredItems[indexPath.row]
-        cell.textLabel?.text = item.dateString + "\n" + item.actionStr
+        let text: String = {
+            if let index1 = item.actionStr.range(of: "(") {
+               return String(item.actionStr.prefix(upTo: index1.lowerBound))
+            }
+            return item.actionStr
+        }()
+        cell.textLabel?.text = item.dateString + "\n" + text
         return cell
     }
 }
