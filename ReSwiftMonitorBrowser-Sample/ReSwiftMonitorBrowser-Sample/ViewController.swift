@@ -102,6 +102,10 @@ class ViewController: UIViewController {
     private var articles: [QiitaObject] = [] {
         didSet {
             update(with: articles, animate: false)
+            let r = type(of: articles)
+            if let hoge = 1 as r {
+                
+            }
         }
     }
     private var isLoading = false {

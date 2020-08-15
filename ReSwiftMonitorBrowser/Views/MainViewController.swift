@@ -32,7 +32,6 @@ final class MainViewController: UISplitViewController {
     }
     // MARK: - private
     private lazy var historyViewController = HistoryViewController.make()
-    private lazy var historyViewController2 = HistoryViewController.make()
     private lazy var jSONDetailViewController = JSONDetailViewController.make()
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -43,6 +42,9 @@ final class MainViewController: UISplitViewController {
     
     @objc private func settingButtonTapped(_ sender: Any) {
         let vc = SettingViewController.make()
+        vc.resetHandler = { [weak self] in
+            self?.historyViewController.reset()
+        }
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true, completion: nil)
     }

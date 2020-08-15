@@ -3,7 +3,6 @@ import MultipeerConnectivity
 
 final class MultipeerConnectivityWrapper: NSObject {
     // MARK: - internal
-    static let shared = MultipeerConnectivityWrapper()
     var sessionDidChangeHandler: ((SessionState, MCPeerID) -> Void)?
     var didReceiveDataHandler: ((PeerObject) -> Void)?
     
@@ -54,28 +53,39 @@ final class MultipeerConnectivityWrapper: NSObject {
         _ = try? session.send(data, toPeers: session.connectedPeers, with: .reliable)
     }
     
+    var sessionState: st
+    
     // MARK: - initializer
     private override init() {
         peerID = .init(displayName: UIDevice.current.name)
+        super.init()
+    }
+    
+    convenience init(serviceType: String) {
+        self.init()
+        setup(serviceType: serviceType)
+    }
+    
+    func setup(serviceType: String) {
         nearbyServiceBrowser = .init(peer: peerID,
-                                     serviceType: Constants.serviceType)
+                                     serviceType: serviceType)
         session = .init(peer: peerID)
-        advertiserAssistant = .init(serviceType: Constants.serviceType,
+        advertiserAssistant = .init(serviceType: serviceType,
                                     discoveryInfo: nil,
                                     session: session)
         nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID,
                                                             discoveryInfo: nil,
-                                                            serviceType: Constants.serviceType)
-        super.init()
+                                                            serviceType: serviceType)
+        session.delegate = nil
         session.delegate = self
     }
     
     // MARK: - private
     private var peerID: MCPeerID
-    private var nearbyServiceBrowser: MCNearbyServiceBrowser
-    private var session: MCSession
-    private var advertiserAssistant: MCAdvertiserAssistant
-    private var nearbyServiceAdvertiser: MCNearbyServiceAdvertiser
+    private var nearbyServiceBrowser: MCNearbyServiceBrowser!
+    private var session: MCSession!
+    private var advertiserAssistant: MCAdvertiserAssistant!
+    private var nearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
     private(set) var state: SessionState = .notConnected
 }
 

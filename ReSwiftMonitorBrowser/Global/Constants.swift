@@ -1,5 +1,5 @@
 import Foundation
 
 struct Constants {
-    static let serviceType = "rebrowser"
+    static let defaultServiceType = "rebrowser"
 }

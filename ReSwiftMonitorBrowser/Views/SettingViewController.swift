@@ -7,6 +7,7 @@ final class SettingViewController: UIViewController {
         let viewController = storyboard.instantiateInitialViewController() as! SettingViewController
         return viewController
     }
+    var resetHandler: (() -> Void)?
     // MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,7 @@ extension SettingViewController: UITableViewDelegate {
         let item = Item.allCases[indexPath.row]
         switch item {
         case .reset:
-            MultipeerConnectivityWrapper.shared.reset()
+            resetHandler?()
         }
     }
 }

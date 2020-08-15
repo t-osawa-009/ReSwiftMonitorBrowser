@@ -14,6 +14,11 @@ final class HistoryViewController: UIViewController {
         tableView.reloadData()
     }
     
+    func reset() {
+        multipeerConnectivityWrapper.setup(serviceType: Constants.defaultServiceType)
+        multipeerConnectivityWrapper.start()
+    }
+    
     func updateSearchText(_ text: String) {
         if text.isEmpty {
             filteredItems = peerIDDic[key] ?? []
@@ -56,7 +61,7 @@ final class HistoryViewController: UIViewController {
             }
         }
         
-        MultipeerConnectivityWrapper.shared.didReceiveDataHandler = { [weak self] object in
+        multipeerConnectivityWrapper.didReceiveDataHandler = { [weak self] object in
             guard let _self = self else {
                 return
             }
@@ -91,7 +96,7 @@ final class HistoryViewController: UIViewController {
             }
         }
         
-        MultipeerConnectivityWrapper.shared.sessionDidChangeHandler = { [weak self] state, peerId in
+        multipeerConnectivityWrapper.sessionDidChangeHandler = { [weak self] state, peerId in
             self?.title = peerId.displayName
             self?.statusLabel.text = state.rawValue
             switch state {
@@ -102,12 +107,12 @@ final class HistoryViewController: UIViewController {
             }
         }
         
-        MultipeerConnectivityWrapper.shared.start()
+        multipeerConnectivityWrapper.start()
         indicator.startAnimating()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50.0
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
-        statusLabel.text = MultipeerConnectivityWrapper.shared.state.rawValue
+        statusLabel.text = multipeerConnectivityWrapper.state.rawValue
     }
     
     override func viewDidLayoutSubviews() {
@@ -116,6 +121,7 @@ final class HistoryViewController: UIViewController {
     }
     
     // MARK: - private
+    private let multipeerConnectivityWrapper = MultipeerConnectivityWrapper(serviceType: Constants.defaultServiceType)
     private lazy var userListViewController = UserListViewController.make()
     private var key = ""
     private let debounceAction = DispatchQueue.global().debounce(delay: .milliseconds(500))
