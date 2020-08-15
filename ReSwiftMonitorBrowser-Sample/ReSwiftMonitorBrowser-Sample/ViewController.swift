@@ -26,18 +26,14 @@ class ViewController: UIViewController {
     }
     
     private func fetchArticle(text: String, completion: @escaping ([QiitaObject]) -> Swift.Void) {
-        let url = "https://qiita.com/api/v2/items" + "?page=1&query=tag%3A" + text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        let urlStr = "https://qiita.com/api/v2/items" + "?page=1&query=tag%3A" + text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         
-        guard var urlComponents = URLComponents(string: url) else {
+        guard let url = URL(string: urlStr) else {
             return
         }
         
         store.dispatch(QiitaActionEnum.isLoading(true))
-        urlComponents.queryItems = [
-            URLQueryItem(name: "per_page", value: "50"),
-        ]
-        
-        let task = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             store.dispatch(QiitaActionEnum.isLoading(false))
             if let error = error {
                 store.dispatch(QiitaActionEnum.error(error))
@@ -105,7 +101,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private var articles: [QiitaObject] = [] {
         didSet {
-            update(with: articles)
+            update(with: articles, animate: false)
         }
     }
     private var isLoading = false {
