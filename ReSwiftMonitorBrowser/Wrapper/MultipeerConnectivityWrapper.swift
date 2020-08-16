@@ -53,8 +53,6 @@ final class MultipeerConnectivityWrapper: NSObject {
         _ = try? session.send(data, toPeers: session.connectedPeers, with: .reliable)
     }
     
-    var sessionState: st
-    
     // MARK: - initializer
     private override init() {
         peerID = .init(displayName: UIDevice.current.name)

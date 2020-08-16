@@ -42,8 +42,8 @@ final class MainViewController: UISplitViewController {
     
     @objc private func settingButtonTapped(_ sender: Any) {
         let vc = SettingViewController.make()
-        vc.resetHandler = { [weak self] in
-            self?.historyViewController.reset()
+        vc.reconnectHandler = { [weak self] in
+            self?.historyViewController.reconnect()
         }
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true, completion: nil)

@@ -4,3 +4,4 @@
 "CANCEL" = "cancel";
 "DELETE" = "delete";
 "ALL_CELAR_HISTORY" = "Do you want to clear your entire history?";
+"RECONNECT" = "reconnect";

@@ -7,7 +7,7 @@ final class SettingViewController: UIViewController {
         let viewController = storyboard.instantiateInitialViewController() as! SettingViewController
         return viewController
     }
-    var resetHandler: (() -> Void)?
+    var reconnectHandler: (() -> Void)?
     // MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,14 @@ final class SettingViewController: UIViewController {
     
     // MARK: - private
     private enum Item: String, CaseIterable {
-        case reset
+        case reconnect
+        
+        func toString() -> String {
+            switch self {
+            case .reconnect:
+                return "RECONNECT".localized
+            }
+        }
     }
     
     @objc private func closeButtonTapped(_ snnder: Any) {
@@ -50,7 +57,7 @@ extension SettingViewController: UITableViewDataSource {
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         let item = Item.allCases[indexPath.row]
-        cell.textLabel?.text = item.rawValue
+        cell.textLabel?.text = item.toString()
         return cell
     }
 }
@@ -59,8 +66,8 @@ extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = Item.allCases[indexPath.row]
         switch item {
-        case .reset:
-            resetHandler?()
+        case .reconnect:
+            reconnectHandler?()
         }
     }
 }

@@ -14,7 +14,7 @@ final class HistoryViewController: UIViewController {
         tableView.reloadData()
     }
     
-    func reset() {
+    func reconnect() {
         multipeerConnectivityWrapper.setup(serviceType: Constants.defaultServiceType)
         multipeerConnectivityWrapper.start()
     }
@@ -26,7 +26,7 @@ final class HistoryViewController: UIViewController {
             filteredItems = peerIDDic[key] ?? [].filter { $0.actionStr.lowercased().contains(text.lowercased()) || $0.dateString.contains(text.lowercased()) }
         }
         filerWord = text
-        debounceAction { [weak self] in
+        throttleAction { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -54,7 +54,7 @@ final class HistoryViewController: UIViewController {
             } else {
                 _self.filteredItems = _self.peerIDDic[_self.key] ?? []
             }
-            self?.debounceAction { [weak self] in
+            self?.throttleAction { [weak self] in
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
@@ -89,7 +89,7 @@ final class HistoryViewController: UIViewController {
             } else {
                 _self.filteredItems = _self.peerIDDic[_self.key] ?? []
             }
-            self?.debounceAction { [weak self] in
+            self?.throttleAction { [weak self] in
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
@@ -124,7 +124,7 @@ final class HistoryViewController: UIViewController {
     private let multipeerConnectivityWrapper = MultipeerConnectivityWrapper(serviceType: Constants.defaultServiceType)
     private lazy var userListViewController = UserListViewController.make()
     private var key = ""
-    private let debounceAction = DispatchQueue.global().debounce(delay: .milliseconds(500))
+    private let throttleAction = DispatchQueue.global().throttle(delay: .microseconds(500))
     @IBOutlet private weak var indicator: UIActivityIndicatorView! {
         didSet {
             indicator.hidesWhenStopped = true
