@@ -1,7 +1,7 @@
 PODS:
   - HandyJSON (5.0.2)
   - ReSwift (5.0.0)
-  - ReSwiftMonitor (0.0.12):
+  - ReSwiftMonitor (0.0.13):
     - HandyJSON (~> 5.0.2)
     - ReSwift (~> 5.0.0)
     - Starscream (= 3.1.1)
@@ -20,7 +20,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
-  ReSwiftMonitor: 6034c404ce975936923d7ba0553424db0107c122
+  ReSwiftMonitor: 24e4f4bf89ab995b428f22580cfa986b86000feb
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
 PODFILE CHECKSUM: d6e195ef1926076a1491bf7d607aaee56983d14d

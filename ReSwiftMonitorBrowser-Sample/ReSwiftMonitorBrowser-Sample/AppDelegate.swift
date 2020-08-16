@@ -4,7 +4,7 @@ import ReSwiftMonitor
 
 var middleware: [Middleware<AppState>] = {
     let monitorMiddleware = MonitorMiddleware.make(configuration: Configuration())
-    let browserMiddleware = BrowserMiddleware.make()
+    let browserMiddleware = BrowserMiddleware().make()
     return [monitorMiddleware, browserMiddleware]
 }()
 
