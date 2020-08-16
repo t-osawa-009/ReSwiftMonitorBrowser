@@ -74,6 +74,7 @@ final class MultipeerConnectivityWrapper: NSObject {
         nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID,
                                                             discoveryInfo: nil,
                                                             serviceType: serviceType)
+        self.serviceType = serviceType
         session.delegate = nil
         session.delegate = self
     }
@@ -85,6 +86,7 @@ final class MultipeerConnectivityWrapper: NSObject {
     private var advertiserAssistant: MCAdvertiserAssistant!
     private var nearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
     private(set) var state: SessionState = .notConnected
+    private(set) var serviceType: String!
 }
 
 extension MultipeerConnectivityWrapper: MCSessionDelegate {

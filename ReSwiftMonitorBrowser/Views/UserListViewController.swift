@@ -23,7 +23,7 @@ final class UserListViewController: UIViewController {
         if keys.count == 1 {
             selectedKey = keys.first
         }
-        debounceAction { [weak self] in
+        throttleAction { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -34,7 +34,6 @@ final class UserListViewController: UIViewController {
     private var peerIDDic: [String: [PeerObject]] = [:]
     private var keys = [String]()
     private var selectedKey: String?
-    private let debounceAction = DispatchQueue.global().debounce(delay: .milliseconds(500))
     private let throttleAction = DispatchQueue.global().throttle(delay: .milliseconds(500))
     @IBOutlet private weak var tableView: UITableView! {
         didSet {

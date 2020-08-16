@@ -8,6 +8,10 @@ final class HistoryViewController: UIViewController {
         return viewController
     }
     var didSelectRow: ((PeerObject) -> Void)?
+    
+    var serviceType: String {
+        return multipeerConnectivityWrapper.serviceType
+    }
     func removeAll() {
         items.removeAll(keepingCapacity: true)
         filteredItems.removeAll(keepingCapacity: true)

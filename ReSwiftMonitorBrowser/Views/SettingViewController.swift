@@ -2,9 +2,10 @@ import UIKit
 
 final class SettingViewController: UIViewController {
     // MARK: - internal
-    class func make() -> SettingViewController {
+    class func make(serviceType: String) -> SettingViewController {
         let storyboard = UIStoryboard(name: "SettingViewController", bundle: Bundle(for: SettingViewController.self))
         let viewController = storyboard.instantiateInitialViewController() as! SettingViewController
+        viewController.serviceType = serviceType
         return viewController
     }
     var reconnectHandler: (() -> Void)?
@@ -22,11 +23,14 @@ final class SettingViewController: UIViewController {
     // MARK: - private
     private enum Item: String, CaseIterable {
         case reconnect
+        case serviceType
         
         func toString() -> String {
             switch self {
             case .reconnect:
                 return "RECONNECT".localized
+            case .serviceType:
+                return "serviceType"
             }
         }
     }
@@ -34,11 +38,12 @@ final class SettingViewController: UIViewController {
     @objc private func closeButtonTapped(_ snnder: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+    private var serviceType: String!
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.tableFooterView = .init()
         }
     }
 }
@@ -57,7 +62,12 @@ extension SettingViewController: UITableViewDataSource {
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         let item = Item.allCases[indexPath.row]
-        cell.textLabel?.text = item.toString()
+        switch item {
+        case .serviceType:
+            cell.textLabel?.text = "serviceType: " + serviceType
+        case .reconnect:
+            cell.textLabel?.text = item.toString()
+        }
         return cell
     }
 }
@@ -68,6 +78,8 @@ extension SettingViewController: UITableViewDelegate {
         switch item {
         case .reconnect:
             reconnectHandler?()
+        case .serviceType:
+            break
         }
     }
 }
