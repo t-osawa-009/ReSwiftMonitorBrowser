@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171C368A24E939A800B795EC /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171C368924E939A800B795EC /* UserDefault.swift */; };
+		171C368C24E93B8500B795EC /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171C368B24E93B8500B795EC /* UserDefaultsWrapper.swift */; };
 		172ADC8F24E624F100468415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172ADC8E24E624F100468415 /* Assets.xcassets */; };
 		172ADC9224E624F100468415 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172ADC9024E624F100468415 /* LaunchScreen.storyboard */; };
 		172ADC9F24E6259F00468415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172ADC9D24E6259F00468415 /* AppDelegate.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		171C368924E939A800B795EC /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		171C368B24E93B8500B795EC /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		172ADC8224E624EF00468415 /* ReSwiftMonitorBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReSwiftMonitorBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172ADC8E24E624F100468415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		172ADC9124E624F100468415 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				172ADC9024E624F100468415 /* LaunchScreen.storyboard */,
 				172ADCD824E62B5700468415 /* Localizable.strings */,
 				172ADCD024E6281700468415 /* Log.swift */,
+				171C368924E939A800B795EC /* UserDefault.swift */,
+				171C368B24E93B8500B795EC /* UserDefaultsWrapper.swift */,
 				172ADC9924E6251100468415 /* ReSwiftMonitorBrowser.entitlements */,
 			);
 			path = ReSwiftMonitorBrowser;
@@ -265,6 +271,7 @@
 				172ADCCB24E627BD00468415 /* AnyDecodable.swift in Sources */,
 				172ADCCC24E627BD00468415 /* AnyEncodable.swift in Sources */,
 				172ADC9F24E6259F00468415 /* AppDelegate.swift in Sources */,
+				171C368C24E93B8500B795EC /* UserDefaultsWrapper.swift in Sources */,
 				172ADCA724E6262E00468415 /* Constants.swift in Sources */,
 				172ADCA324E625E100468415 /* DispatchQueue+ex.swift in Sources */,
 				172ADCC424E6270E00468415 /* HistoryViewController.swift in Sources */,
@@ -275,6 +282,7 @@
 				172ADCE524E6A18300468415 /* UserListViewController.swift in Sources */,
 				172ADCAB24E6266500468415 /* PeerObject.swift in Sources */,
 				172ADCA024E6259F00468415 /* SceneDelegate.swift in Sources */,
+				171C368A24E939A800B795EC /* UserDefault.swift in Sources */,
 				172ADCA824E6262E00468415 /* SessionState.swift in Sources */,
 				172ADCBD24E6270E00468415 /* SettingViewController.swift in Sources */,
 				172ADCDB24E6589800468415 /* String+ex.swift in Sources */,

@@ -5,3 +5,6 @@
 "DELETE" = "削除";
 "ALL_CELAR_HISTORY" = "履歴をすべて削除してもいいですか？";
 "RECONNECT" = "再接続";
+"OK"="OK";
+"EDIT_SERVICETYPE" = "serviceTypeを編集";
+"MAX_15_CHARACTERS" = "15文字まで";

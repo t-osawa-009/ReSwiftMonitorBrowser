@@ -41,7 +41,7 @@ final class MainViewController: UISplitViewController {
     }()
     
     @objc private func settingButtonTapped(_ sender: Any) {
-        let vc = SettingViewController.make(serviceType: historyViewController.serviceType)
+        let vc = SettingViewController.make()
         vc.reconnectHandler = { [weak self] in
             self?.historyViewController.reconnect()
         }

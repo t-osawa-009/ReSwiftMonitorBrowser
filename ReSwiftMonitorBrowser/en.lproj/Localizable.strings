@@ -5,3 +5,6 @@
 "DELETE" = "delete";
 "ALL_CELAR_HISTORY" = "Do you want to clear your entire history?";
 "RECONNECT" = "reconnect";
+"OK"="OK";
+"EDIT_SERVICETYPE" = "Edit the serviceType";
+"MAX_15_CHARACTERS" = "Up to 15 characters";

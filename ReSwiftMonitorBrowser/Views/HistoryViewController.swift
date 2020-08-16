@@ -9,9 +9,6 @@ final class HistoryViewController: UIViewController {
     }
     var didSelectRow: ((PeerObject) -> Void)?
     
-    var serviceType: String {
-        return multipeerConnectivityWrapper.serviceType
-    }
     func removeAll() {
         items.removeAll(keepingCapacity: true)
         filteredItems.removeAll(keepingCapacity: true)
@@ -19,7 +16,7 @@ final class HistoryViewController: UIViewController {
     }
     
     func reconnect() {
-        multipeerConnectivityWrapper.setup(serviceType: Constants.defaultServiceType)
+        multipeerConnectivityWrapper.setup(serviceType: settingsServiceType)
         multipeerConnectivityWrapper.start()
     }
     
@@ -125,7 +122,10 @@ final class HistoryViewController: UIViewController {
     }
     
     // MARK: - private
-    private let multipeerConnectivityWrapper = MultipeerConnectivityWrapper(serviceType: Constants.defaultServiceType)
+    private lazy var multipeerConnectivityWrapper = MultipeerConnectivityWrapper(serviceType: settingsServiceType)
+    private var settingsServiceType: String {
+        return UserDefaultsWrapper.default.serviceType
+    }
     private lazy var userListViewController = UserListViewController.make()
     private var key = ""
     private let throttleAction = DispatchQueue.global().throttle(delay: .microseconds(500))

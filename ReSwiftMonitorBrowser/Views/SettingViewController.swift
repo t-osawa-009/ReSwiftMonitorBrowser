@@ -2,10 +2,9 @@ import UIKit
 
 final class SettingViewController: UIViewController {
     // MARK: - internal
-    class func make(serviceType: String) -> SettingViewController {
+    class func make() -> SettingViewController {
         let storyboard = UIStoryboard(name: "SettingViewController", bundle: Bundle(for: SettingViewController.self))
         let viewController = storyboard.instantiateInitialViewController() as! SettingViewController
-        viewController.serviceType = serviceType
         return viewController
     }
     var reconnectHandler: (() -> Void)?
@@ -64,7 +63,7 @@ extension SettingViewController: UITableViewDataSource {
         let item = Item.allCases[indexPath.row]
         switch item {
         case .serviceType:
-            cell.textLabel?.text = "serviceType: " + serviceType
+            cell.textLabel?.text = "serviceType: " + UserDefaultsWrapper.default.serviceType
         case .reconnect:
             cell.textLabel?.text = item.toString()
         }
@@ -79,7 +78,26 @@ extension SettingViewController: UITableViewDelegate {
         case .reconnect:
             reconnectHandler?()
         case .serviceType:
-            break
+            var uiTextField = UITextField()
+            let ac = UIAlertController(title: "EDIT_SERVICETYPE".localized,
+                                       message: "MAX_15_CHARACTERS".localized,
+                                       preferredStyle: .alert)
+            let aa = UIAlertAction(title: "OK".localized, style: .default) { [weak self] (action) in
+                let text = (uiTextField.text ?? "").removeSpecialCharacters()
+                UserDefaultsWrapper.default.serviceType = String(text.prefix(15))
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .removeWhitespace()
+                self?.tableView.reloadData()
+            }
+            let cancel = UIAlertAction(title: "CANCEL".localized, style: .cancel, handler: nil)
+            ac.addTextField { (textField) in
+                textField.text = UserDefaultsWrapper.default.serviceType
+                textField.keyboardType = .emailAddress
+                uiTextField = textField
+            }
+            ac.addAction(aa)
+            ac.addAction(cancel)
+            present(ac, animated: true, completion: nil)
         }
     }
 }
