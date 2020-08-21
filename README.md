@@ -22,6 +22,10 @@ let store = Store<AppState>(reducer: AppState.reducer(), state: AppState(), midd
 - Launch ReSwiftMonitorBrowser
 - Allow network with each device by alert
 
+## Note
+- ReSwiftMonitorBrowser & ReSwiftMonitor use [multipeerconnectivity](https://developer.apple.com/documentation/multipeerconnectivity)
+- Must be used on the same network
+
 ## CONTRIBUTING
 There's still a lot of work to do here. We would love to see you involved. You can find all the details on how to get started in the [Contributing Guide](https://github.com/t-osawa-009/ReSwiftMonitorBrowser/blob/master/CONTRIBUTING.md).
 
